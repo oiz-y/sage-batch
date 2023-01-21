@@ -115,7 +115,11 @@ def main(event, context):
 
     info_log('id', _id)
 
-    if target_group != 'S23':
+    except_group = event['exceptGroup']
+
+    info_log('except_group', except_group)
+
+    if target_group != except_group:
         put_group_data(_id, target_group, polynomial)
     else:
         pass
@@ -129,7 +133,8 @@ if __name__ == '__main__':
     event = {
         'inputPolynomial': args[1],
         'primeRange': args[2],
-        'id': args[3]
+        'id': args[3],
+        'exceptGroup': args[4]
     }
 
     info_log('event', event)
