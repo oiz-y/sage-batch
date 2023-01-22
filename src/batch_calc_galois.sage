@@ -37,7 +37,7 @@ def generate_polynomial(degree, coeff_range):
     return polynomial
 
 
-def batch_calc(max_times, degree, prime_range, coeff_range, except_group):
+def batch_calc(max_times, degree, prime_range, coeff_range, except_group, output_file):
     except_group = adjust_except_group(except_group, degree)
 
     info_log('adjust except_group', except_group)
@@ -51,7 +51,8 @@ def batch_calc(max_times, degree, prime_range, coeff_range, except_group):
             input_polynomial,
             str(prime_range),
             str(_id),
-            except_group
+            except_group,
+            output_file
         ]
 
         info_log('command', command)
@@ -69,13 +70,15 @@ if __name__ == '__main__':
     prime_range = int(args[3])
     coeff_range = int(args[4])
     except_group = args[5]
+    output_file = args[6]
 
     info_log('max_times', max_times)
     info_log('degree', degree)
     info_log('prime_range', prime_range)
     info_log('coeff_range', coeff_range)
     info_log('except_group', except_group)
+    info_log('output_file', output_file)
 
-    batch_calc(max_times, degree, prime_range, coeff_range, except_group)
+    batch_calc(max_times, degree, prime_range, coeff_range, except_group, output_file)
 
     info_log('END', 'batch calc end!')

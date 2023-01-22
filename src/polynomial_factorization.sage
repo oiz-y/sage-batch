@@ -1,7 +1,10 @@
 import sys
 import json
 
-from utils import calc_ratio
+from utils import (
+    calc_ratio,
+    write_file
+)
 from logs import (
     info_log,
     error_log
@@ -124,6 +127,12 @@ def main(event, context):
     else:
         pass
 
+    file_path = event['outputFile']
+
+    info_log('file_path', file_path)
+
+    write_file(file_path, _id, target_group, polynomial)
+
 
 if __name__ == '__main__':
     args = sys.argv
@@ -134,7 +143,8 @@ if __name__ == '__main__':
         'inputPolynomial': args[1],
         'primeRange': args[2],
         'id': args[3],
-        'exceptGroup': args[4]
+        'exceptGroup': args[4],
+        'outputFile': args[5]
     }
 
     info_log('event', event)
