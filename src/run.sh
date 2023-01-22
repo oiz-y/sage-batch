@@ -20,4 +20,19 @@ if [ "${EXCEPT_GROUP}" = "" ]; then
   EXCEPT_GROUP=NotSelected
 fi
 
-sage batch_calc_galois.sage ${MAX_TIMES} ${DEGREE} ${PRIME_RANGE} ${COEFFICIENT_RANGE} ${EXCEPT_GROUP}
+if [ "${OUTPUT_FILE_PATH}" = "" ]; then
+  OUTPUT_FILE_PATH=./output.txt
+fi
+
+if [ "${S3_BUCKET}" = "" ]; then
+  S3_BUCKET=sage-batch-bucket
+fi
+
+sage batch_calc_galois.sage ${MAX_TIMES} ${DEGREE} ${PRIME_RANGE} ${COEFFICIENT_RANGE} ${EXCEPT_GROUP} ${OUTPUT_FILE_PATH}
+
+filename=`basename ${OUTPUT_FILE_PATH} | sed 's/\.[^\.]*$//'`.`date +%Y%m%d-%H%M%S`.txt
+# tar -zcf ${filename}.tar.gz ${OUTPUT_FILE_PATH}
+
+# aws s3 cp ${filename} s3://${S3_BUCKET}/`date +%Y`/`date +%m`/
+
+aws s3 cp ${OUTPUT_FILE_PATH} s3://${S3_BUCKET}/`date +%Y`/`date +%m`/${filename}

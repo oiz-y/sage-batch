@@ -12,3 +12,10 @@ def calc_ratio(factor_types):
     }
 
     return ratios
+
+
+def write_file(file_path, _id, target_group, polynomial):
+    with open(file_path, mode='a') as f:
+        f.write(
+            ','.join([_id, target_group, polynomial]) + '\n'
+        )
