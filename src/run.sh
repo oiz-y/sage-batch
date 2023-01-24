@@ -35,4 +35,4 @@ filename=`basename ${OUTPUT_FILE_PATH} | sed 's/\.[^\.]*$//'`.`date +%Y%m%d-%H%M
 
 # aws s3 cp ${filename} s3://${S3_BUCKET}/`date +%Y`/`date +%m`/
 
-aws s3 cp ${OUTPUT_FILE_PATH} s3://${S3_BUCKET}/`date +%Y`/`date +%m`/${filename}
+aws s3 cp ${OUTPUT_FILE_PATH} s3://${S3_BUCKET}/`date +%Y`/`date +%m`/`date +%d`/${filename}
