@@ -101,7 +101,7 @@ aws batch submit-job \
 
 ## Related links
 
-### https://www.galoisapp.com/
+### https://galoisapp.com/
 
 This application computes the Galois group of the input integer coefficients.
 
